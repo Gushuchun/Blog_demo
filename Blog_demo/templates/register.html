@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block head %}
+    <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/register.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+    <div style="max-width: 330px;" class="m-auto">
+        <h1 class="text-center">REGISTER</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label>Username</label>
+                <input type="text" class="form-control" name="username" placeholder="Enter Username"></input>
+            </div>
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Enter Password"></input>
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter Email"></input>
+            </div>
+            <div class="mb-3">
+                <label>Verification Code</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter Verification Code"
+                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="get_captcha">Get VCode</button>
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary w-100">Login</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
