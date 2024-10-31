@@ -5,31 +5,50 @@
 {% block head %}
     <script src="{% static 'jquery/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/register.js' %}"></script>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.875em; /* Adjust size as needed */
+        }
+    </style>
 {% endblock %}
 
 {% block main %}
     <div style="max-width: 330px;" class="m-auto">
         <h1 class="text-center">REGISTER</h1>
-        <form method="POST">
+
+        <form action="" method="POST">
+            {% csrf_token %}
             <div class="mb-3">
                 <label>Username</label>
-                <input type="text" class="form-control" name="username" placeholder="Enter Username"></input>
+                <input type="text" class="form-control" name="username" placeholder="Enter username" value="{{ form.username.value|default:'' }}">
+                {% if form.username.errors %}
+                    <span class="error-message">{{ form.username.errors|first }}</span>
+                {% endif %}
             </div>
             <div class="mb-3">
                 <label>Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Enter Password"></input>
+                <input type="password" class="form-control" name="password" placeholder="Enter password">
+                {% if form.password.errors %}
+                    <span class="error-message">{{ form.password.errors|first }}</span>
+                {% endif %}
             </div>
             <div class="mb-3">
                 <label>Email</label>
-                <input type="email" class="form-control" name="email" placeholder="Enter Email"></input>
+                <input type="email" class="form-control" name="email" placeholder="Enter email" value="{{ form.email.value|default:'' }}">
+                {% if form.email.errors %}
+                    <span class="error-message">{{ form.email.errors|first }}</span>
+                {% endif %}
             </div>
             <div class="mb-3">
                 <label>Verification Code</label>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Enter Verification Code"
-                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="captcha" placeholder="Enter verification code" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="button" id="get_captcha">Get VCode</button>
                 </div>
+                {% if form.captcha.errors %}
+                    <span class="error-message">{{ form.captcha.errors|first }}</span>
+                {% endif %}
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary w-100">Login</button>
